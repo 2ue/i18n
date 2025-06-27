@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
 import path from 'path';
 import crypto from 'crypto';
-import { merge } from 'lodash-es';
+import { merge } from 'lodash';
 import { pinyin } from 'pinyin-pro';
 import { Logger } from '../utils/logger';
 import { configManager } from '../config';

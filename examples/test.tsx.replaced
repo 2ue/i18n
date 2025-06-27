@@ -1,0 +1,50 @@
+import React from 'react';
+
+// 简单组件，包含多种形式的中文字符串
+function TestComponent() {
+  // 添加缺失的变量
+  const user = { name: $t('zhangsan') };
+  const isLoading = false;
+
+  // 1. 字符串字面量
+  const message1 = $t('nihaoshijie');
+  const message2 = $t("huanyingshiyong");
+
+  // 2. 模板字符串
+  const greeting = `你好，${user.name}`;
+
+  // 3. JSX文本节点
+  return (
+    <div className="container">
+      <h1>{$t('ceshizujian')}</h1>
+      <p>{message1}</p>
+      <p>{message2}</p>
+      <p>{greeting}</p>
+
+      {/* 4. JSX属性 */}
+      <button title={$t("dianjianniu")}>{$t('queding')}</button>
+
+      {/* 5. JSX表达式容器 */}
+      <div>{isLoading ? $t('jiazaizhong') : $t('jiazaiwancheng')}</div>
+
+      {/* 6. 数组 */}
+      {[$t('queding'), $t('quxiao')].map((text) =>
+      <button key={text}>{text}</button>
+      )}
+
+      {/* 7. 对象 */}
+      <select>
+        {[
+        { label: $t('xuanxiangyi'), value: '1' },
+        { label: $t('xuanxianger'), value: '2' }].
+        map((option) =>
+        <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        )}
+      </select>
+    </div>);
+
+}
+
+export default TestComponent;

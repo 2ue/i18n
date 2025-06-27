@@ -1,6 +1,6 @@
 import path from 'path';
 import chalk from 'chalk';
-import ora, { Ora } from 'ora';
+import type { Ora } from 'ora';
 import { Command } from 'commander';
 import { Config } from '../types/config';
 import { configManager } from '../config';
@@ -11,6 +11,15 @@ import fs from 'fs-extra';
 
 // 创建独立的日志记录器
 const cliLogger = Logger.create({ prefix: 'CLI' });
+
+/**
+ * 动态导入ora模块
+ * 解决ESM导入问题
+ */
+async function importOra() {
+  const ora = (await import('ora')).default;
+  return ora;
+}
 
 /**
  * CLI辅助模块
@@ -68,7 +77,8 @@ export function loadConfiguration(configPath?: string, options: Record<string, a
  * @param text 初始文本
  * @returns ora实例
  */
-export function createSpinner(text: string): Ora {
+export async function createSpinner(text: string): Promise<Ora> {
+  const ora = await importOra();
   return ora(text).start();
 }
 
@@ -275,7 +285,7 @@ export async function handleExtractCommand(options: ExtractCommandHandler): Prom
     autoImport = false
   } = options;
 
-  const spinner = createSpinner(initialText);
+  const spinner = await createSpinner(initialText);
 
   try {
     // 获取配置路径
@@ -337,7 +347,7 @@ export async function handleTranslateCommand(options: TranslateCommandHandler): 
     getTargetLocales
   } = options;
 
-  const spinner = createSpinner(initialText);
+  const spinner = await createSpinner(initialText);
 
   try {
     // 获取配置路径
@@ -425,7 +435,7 @@ export async function handleInitCommand(options: InitCommandHandler): Promise<vo
     generateConfigContent
   } = options;
 
-  const spinner = createSpinner(initialText);
+  const spinner = await createSpinner(initialText);
 
   try {
     const outputPath = path.resolve(process.cwd(), cmdOptions.output);
