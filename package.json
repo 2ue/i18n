@@ -58,7 +58,6 @@
     "commander": "^14.0.0",
     "fast-glob": "^3.3.3",
     "fs-extra": "^11.3.0",
-    "glob": "^11.0.3",
     "lodash": "^4.17.21",
     "lodash-es": "^4.17.21",
     "micromatch": "^4.0.8",

@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import chalk from 'chalk';
 import path from 'path';
 import fs from 'fs-extra';
+import { formatHelpText } from './utils';
 
 // 导入命令
 import { initCommand } from './commands/init';
@@ -37,15 +37,17 @@ program
   .option('-v, --verbose', '显示详细输出');
 
 // 自定义帮助信息
-program.addHelpText('after', `
-示例:
-  $ i18n-xy init                     # 初始化配置文件
-  $ i18n-xy extract                  # 提取中文文案
-  $ i18n-xy replace                  # 替换中文为国际化函数
-  $ i18n-xy translate --target en-US # 翻译到英语
-
-更多信息请访问: ${chalk.cyan('https://github.com/yourusername/i18n-xy')}
-`);
+program.addHelpText('after', formatHelpText(
+  'i18n-xy',
+  '国际化提取替换翻译工具',
+  [
+    ['i18n-xy init', '初始化配置文件'],
+    ['i18n-xy extract', '提取中文文案'],
+    ['i18n-xy replace', '替换中文为国际化函数调用'],
+    ['i18n-xy translate --locale en,ja', '翻译到英语和日语'],
+    ['i18n-xy --help', '显示帮助信息']
+  ]
+));
 
 // 解析命令行参数
 program.parse(process.argv);
