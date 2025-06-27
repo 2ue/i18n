@@ -1,0 +1,767 @@
+{
+  "tasks": [
+    {
+      "id": "8dbf1dc6-edef-4dd9-a9fa-8a5a8d506a87",
+      "name": "项目初始化与配置",
+      "description": "使用pnpm初始化项目，配置TypeScript、ESLint，搭建基础目录结构，创建package.json基本信息",
+      "notes": "确保检查本地Node.js和pnpm版本，按PRD要求固化版本。目录结构应遵循模块化设计，预留未来扩展空间。优先保证功能的简洁易读性，同时兼顾模块化和扩展性，避免过度设计。对于每个模块，提前列举所需依赖，并评估使用最优选择。",
+      "status": "completed",
+      "dependencies": [],
+      "createdAt": "2025-06-27T03:02:15.772Z",
+      "updatedAt": "2025-06-27T03:43:21.544Z",
+      "relatedFiles": [
+        {
+          "path": "package.json",
+          "type": "CREATE",
+          "description": "项目配置文件",
+          "lineStart": 1,
+          "lineEnd": 30
+        },
+        {
+          "path": "tsconfig.json",
+          "type": "CREATE",
+          "description": "TypeScript配置文件",
+          "lineStart": 1,
+          "lineEnd": 20
+        },
+        {
+          "path": ".eslintrc.js",
+          "type": "CREATE",
+          "description": "ESLint配置文件",
+          "lineStart": 1,
+          "lineEnd": 25
+        }
+      ],
+      "implementationGuide": "1. 使用pnpm init初始化项目\n2. 安装TypeScript、ESLint等开发依赖\n3. 配置tsconfig.json、eslintrc.js等配置文件\n4. 创建src、test等基础目录\n5. 修改package.json中的name、version、description等基本信息\n6. 添加build、test等基本npm脚本",
+      "verificationCriteria": "1. 项目应能正常使用pnpm安装依赖\n2. TypeScript编译无错误\n3. ESLint检查能正常工作\n4. 目录结构符合PRD要求\n5. package.json包含正确的基本信息和脚本",
+      "analysisResult": "国际化提取替换翻译工具开发项目架构已明确，采用模块化设计，使用TypeScript开发，基于Node.js运行环境，需遵循PRD文档的要求实现扫描、提取、替换、翻译功能。",
+      "summary": "成功完成了项目初始化与配置任务。使用pnpm初始化了项目，设置了TypeScript配置，搭建了基础目录结构，创建了package.json基本信息。项目能够正确编译并执行基本功能。CLI命令可正常执行，显示版本信息。ESLint配置有一些修改但整体功能完整，支持了项目结构的模块化设计。",
+      "completedAt": "2025-06-27T03:43:21.544Z"
+    },
+    {
+      "id": "5f44ef9c-2804-4507-a96c-2c5e4281e83d",
+      "name": "配置加载器实现",
+      "description": "实现配置加载器模块，支持加载并合并ts、js和json格式的配置文件，提供默认配置和配置验证功能",
+      "notes": "配置加载模块是整个应用的基础，其他模块将依赖于此模块获取配置。设计时需确保配置一次加载后可在全局使用，避免重复加载。必须严格遵循configuration.md中定义的配置结构和类型，提供完整的TypeScript类型定义。依赖选择应当优先考虑轻量级且成熟的库，如lodash-es用于merge操作，避免引入过多不必要的依赖。",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "8dbf1dc6-edef-4dd9-a9fa-8a5a8d506a87"
+        }
+      ],
+      "createdAt": "2025-06-27T03:02:15.772Z",
+      "updatedAt": "2025-06-27T04:29:09.246Z",
+      "relatedFiles": [
+        {
+          "path": "src/types/config.ts",
+          "type": "CREATE",
+          "description": "配置类型定义",
+          "lineStart": 1,
+          "lineEnd": 150
+        },
+        {
+          "path": "src/config/defaults.ts",
+          "type": "CREATE",
+          "description": "默认配置实现",
+          "lineStart": 1,
+          "lineEnd": 100
+        },
+        {
+          "path": "src/config/loader.ts",
+          "type": "CREATE",
+          "description": "配置加载器实现",
+          "lineStart": 1,
+          "lineEnd": 120
+        },
+        {
+          "path": "src/config/validator.ts",
+          "type": "CREATE",
+          "description": "配置验证器实现",
+          "lineStart": 1,
+          "lineEnd": 80
+        },
+        {
+          "path": "src/config/index.ts",
+          "type": "CREATE",
+          "description": "配置模块入口",
+          "lineStart": 1,
+          "lineEnd": 30
+        }
+      ],
+      "implementationGuide": "1. 创建types目录，定义配置类型接口，严格对照configuration.md\n2. 实现默认配置对象，参考configuration.md中的配置项，保证配置完整性\n3. 开发配置加载函数，推荐使用同步方法读取配置文件\n4. 实现配置合并功能，使用lodash-es的merge合并用户配置和默认配置\n5. 添加配置验证函数，检查关键配置项\n6. 创建配置管理器，统一管理配置访问\n7. 需要支持的依赖：\n   - lodash-es: 用于深度合并配置对象\n   - fs-extra: 用于同步读取文件\n   - path: 处理文件路径",
+      "verificationCriteria": "1. 能正确加载ts、js和json格式的配置文件\n2. 正确合并用户配置和默认配置\n3. 对缺失或错误的关键配置进行有效验证\n4. 提供统一的配置访问接口\n5. 配置模块具有良好的类型定义",
+      "analysisResult": "国际化提取替换翻译工具开发项目架构已明确，采用模块化设计，使用TypeScript开发，基于Node.js运行环境，需遵循PRD文档的要求实现扫描、提取、替换、翻译功能。",
+      "summary": "成功实现了配置加载器模块，支持加载并合并ts、js和json格式的配置文件，并提供了默认配置、配置验证和统一的配置访问接口。模块符合设计要求，代码组织良好，具有完整的类型定义，并通过测试验证了功能正常。",
+      "completedAt": "2025-06-27T04:29:09.246Z"
+    },
+    {
+      "id": "b5a8e981-3187-4aea-a3a0-ff71e42c4208",
+      "name": "日志管理模块实现",
+      "description": "实现日志管理模块，根据配置支持不同级别日志输出，提供统一的日志接口",
+      "notes": "日志模块应尽早实现，其他模块开发过程中都会用到。设计时考虑可扩展性，方便后续添加文件日志等功能。避免引入过重的日志库，可以简单封装console方法即可，确保简洁易用。初期只实现必要功能，不过度设计。",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "5f44ef9c-2804-4507-a96c-2c5e4281e83d"
+        }
+      ],
+      "createdAt": "2025-06-27T03:02:15.772Z",
+      "updatedAt": "2025-06-27T04:45:22.366Z",
+      "relatedFiles": [
+        {
+          "path": "src/utils/logger.ts",
+          "type": "CREATE",
+          "description": "日志模块实现",
+          "lineStart": 1,
+          "lineEnd": 100
+        }
+      ],
+      "implementationGuide": "1. 定义日志级别枚举：minimal、normal、verbose\n2. 实现日志函数，支持info、warning、error等不同类型\n3. 创建格式化函数，处理日志前缀、时间戳等\n4. 根据配置中的logging设置控制日志输出\n5. 提供统一的日志模块导出\n6. 需要的依赖：\n   - chalk (可选): 用于彩色日志输出\n   - 不推荐引入重量级日志库，尽量使用内置功能",
+      "verificationCriteria": "1. 能根据配置正确控制日志输出级别\n2. 支持不同类型的日志（info、warning、error等）\n3. 日志格式规范一致\n4. 提供友好的API接口",
+      "analysisResult": "国际化提取替换翻译工具开发项目架构已明确，采用模块化设计，使用TypeScript开发，基于Node.js运行环境，需遵循PRD文档的要求实现扫描、提取、替换、翻译功能。",
+      "summary": "成功实现了日志管理模块，支持不同级别的日志输出(minimal、normal、verbose)，提供了丰富的日志类型(info、success、warning、error、debug)，根据配置控制日志输出，并支持彩色输出和模块前缀。日志模块采用单例模式设计，同时支持创建多个带前缀的实例，方便不同模块记录日志。测试用例验证了所有功能正常工作。",
+      "completedAt": "2025-06-27T04:45:22.365Z"
+    },
+    {
+      "id": "38d1ee29-8b31-4d47-80ab-f345f662622b",
+      "name": "文件操作模块实现",
+      "description": "封装文件操作相关功能，包括读写文件、查找文件、检查文件存在性、glob匹配等基础功能",
+      "notes": "这是一个基础模块，需尽早完成，其他模块会大量依赖此模块进行文件操作。为了确保执行顺序可控，文件操作模块必须使用同步方法（如fs-extra的xxxSync系列方法），避免使用async/await。遵循配置文件中的路径设置，实现对应的文件处理逻辑。",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "8dbf1dc6-edef-4dd9-a9fa-8a5a8d506a87"
+        }
+      ],
+      "createdAt": "2025-06-27T03:02:15.772Z",
+      "updatedAt": "2025-06-27T04:55:16.915Z",
+      "relatedFiles": [
+        {
+          "path": "src/utils/file.ts",
+          "type": "CREATE",
+          "description": "文件操作模块实现",
+          "lineStart": 1,
+          "lineEnd": 150
+        }
+      ],
+      "implementationGuide": "1. 使用fs-extra封装同步文件读写方法，严格使用xxxSync系列方法，禁止使用await\n2. 使用fast-glob的sync方法实现文件查找功能\n3. 封装目录创建、文件存在检查等常用操作，全部使用同步方法\n4. 实现JSON文件读写专用方法，支持格式化选项\n5. 创建文件路径处理和glob匹配判断函数\n6. 需要的依赖：\n   - fs-extra: 用于文件操作（使用xxxSync系列方法）\n   - fast-glob: 用于文件查找（使用sync方法）\n   - path: 用于路径处理\n   - micromatch (可选): 用于glob匹配判断",
+      "verificationCriteria": "1. 文件读写功能正常\n2. 能正确执行glob文件查找\n3. 目录创建具有健壮性\n4. JSON文件处理正确\n5. 路径处理和glob匹配判断准确",
+      "analysisResult": "国际化提取替换翻译工具开发项目架构已明确，采用模块化设计，使用TypeScript开发，基于Node.js运行环境，需遵循PRD文档的要求实现扫描、提取、替换、翻译功能。",
+      "summary": "成功实现了文件操作模块，该模块封装了读写文件、查找文件、检查文件存在性、创建目录、JSON文件处理和glob匹配等功能，严格遵循同步方法的要求。模块具有完善的错误处理和日志记录，提供了清晰的API接口和类型定义。通过全面的测试验证，所有功能都正常工作，满足了任务的验证标准。",
+      "completedAt": "2025-06-27T04:55:16.914Z"
+    },
+    {
+      "id": "0752c587-b41a-4533-9cbd-643da42994f7",
+      "name": "全局变量管理模块实现",
+      "description": "创建全局变量管理器，统一管理和访问全局状态和共享数据",
+      "notes": "全局变量管理为可选模块，根据开发过程中的实际需求决定是否实现。如果其他模块可以有效管理状态，可以简化或省略此模块。初期实现应保持简单，仅添加必要功能，避免过度设计。",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "8dbf1dc6-edef-4dd9-a9fa-8a5a8d506a87"
+        }
+      ],
+      "createdAt": "2025-06-27T03:02:15.772Z",
+      "updatedAt": "2025-06-27T05:04:11.644Z",
+      "relatedFiles": [
+        {
+          "path": "src/utils/globals.ts",
+          "type": "CREATE",
+          "description": "全局变量管理模块实现",
+          "lineStart": 1,
+          "lineEnd": 80
+        }
+      ],
+      "implementationGuide": "1. 设计简单的全局变量存储结构\n2. 实现get、set方法用于存取全局变量\n3. 添加初始化和重置方法\n4. 设计合理的命名空间区分不同模块的全局变量\n5. 此模块为可选实现，可根据实际开发需要再决定实现细节\n6. 需要的依赖：\n   - 无需额外依赖，使用JavaScript内置功能即可",
+      "verificationCriteria": "1. 能正确存取全局变量\n2. 提供类型安全的访问方式\n3. 初始化和重置功能正常工作\n4. 命名空间机制有效隔离不同模块数据",
+      "analysisResult": "国际化提取替换翻译工具开发项目架构已明确，采用模块化设计，使用TypeScript开发，基于Node.js运行环境，需遵循PRD文档的要求实现扫描、提取、替换、翻译功能。",
+      "summary": "全局变量管理模块已成功实现并通过测试验证。该模块提供了类型安全的全局变量存储和访问机制，包括命名空间隔离、变量设置、获取、删除和清理功能。实现了单例模式确保全局唯一实例，并提供了便捷的函数式API和预定义命名空间常量。测试验证了所有功能正常工作。",
+      "completedAt": "2025-06-27T05:04:11.644Z"
+    },
+    {
+      "id": "5eb1f47e-2363-4a54-8e3f-b2cb3b9be12e",
+      "name": "中文匹配规则模块实现",
+      "description": "实现中文文本匹配规则定义，支持全中文匹配和包含中文匹配两种模式",
+      "notes": "匹配规则是提取中文的核心，需要考虑各种边缘情况，参考case.md中的测试用例。实现应当简洁高效，采用正则表达式进行匹配，并提供根据配置切换不同匹配模式的能力。所有匹配方法应为同步操作。",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "5f44ef9c-2804-4507-a96c-2c5e4281e83d"
+        }
+      ],
+      "createdAt": "2025-06-27T03:02:15.772Z",
+      "updatedAt": "2025-06-27T05:14:31.825Z",
+      "relatedFiles": [
+        {
+          "path": "src/utils/chinese-matcher.ts",
+          "type": "CREATE",
+          "description": "中文匹配规则实现",
+          "lineStart": 1,
+          "lineEnd": 100
+        }
+      ],
+      "implementationGuide": "1. 定义中文字符正则表达式，参考Unicode中文字符范围\n2. 实现isAllChinese函数检查是否全是中文\n3. 实现containsChinese函数检查是否包含中文\n4. 创建根据配置选择匹配模式的工厂函数\n5. 添加特殊情况处理（如排除注释中的中文）\n6. 需要的依赖：\n   - 无需额外依赖，使用JavaScript内置正则表达式功能即可",
+      "verificationCriteria": "1. 全中文匹配模式正确识别纯中文字符串\n2. 包含中文匹配模式正确识别混合字符串\n3. 处理边缘情况（如标点符号）\n4. 根据配置正确切换匹配模式\n5. 能排除不应处理的情况（如注释中的中文）",
+      "analysisResult": "国际化提取替换翻译工具开发项目架构已明确，采用模块化设计，使用TypeScript开发，基于Node.js运行环境，需遵循PRD文档的要求实现扫描、提取、替换、翻译功能。",
+      "summary": "中文匹配规则模块已成功实现并通过测试验证。该模块提供了全中文匹配和包含中文匹配两种模式，支持中文字符和标点符号的正确识别，并实现了注释排除、自定义排除规则等功能。模块采用类型安全的设计，提供了灵活的配置选项和便捷的API。测试验证了所有功能正常工作，包括边缘情况处理。",
+      "completedAt": "2025-06-27T05:14:31.824Z"
+    },
+    {
+      "id": "f7d107e5-54fb-42d0-8335-1c51eec2eeba",
+      "name": "Key-Value管理器实现",
+      "description": "实现Key-Value管理器，处理中文文本和对应key的生成、存储、查询和去重",
+      "notes": "这是国际化文案管理的核心模块，需要特别关注key的唯一性和一致性。特别重要的是能够加载并合并现有的key-value数据，包括之前提取的内容，需要正确读取输出目录中的JSON文件并合并新旧数据。所有文件操作都需使用同步方法，保证数据处理顺序的一致性。",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "5f44ef9c-2804-4507-a96c-2c5e4281e83d"
+        },
+        {
+          "taskId": "38d1ee29-8b31-4d47-80ab-f345f662622b"
+        }
+      ],
+      "createdAt": "2025-06-27T03:02:15.772Z",
+      "updatedAt": "2025-06-27T05:30:23.616Z",
+      "relatedFiles": [
+        {
+          "path": "src/core/key-value-manager.ts",
+          "type": "CREATE",
+          "description": "Key-Value管理器实现",
+          "lineStart": 1,
+          "lineEnd": 200
+        }
+      ],
+      "implementationGuide": "1. 设计key-value存储结构，支持加载已有JSON文件数据\n2. 实现key生成算法，支持拼音转换（使用pinyin-pro）\n3. 实现重复key处理（hash或计数后缀）\n4. 创建value重复检查和key重复检查方法\n5. 实现排序功能\n6. 添加JSON文件写入方法，生成多语言文件\n7. 实现加载现有JSON文件的功能，确保能正确合并新旧数据\n8. 文件操作部分使用同步方法实现\n9. 需要的依赖：\n   - pinyin-pro: 用于生成拼音key\n   - crypto (内置): 用于生成hash\n   - lodash-es: 用于深度合并对象\n   - fs-extra: 用于文件操作（使用xxxSync系列方法）",
+      "verificationCriteria": "1. key生成算法正确工作，生成符合规范的key\n2. 正确处理重复key情况\n3. value重复检查准确\n4. 排序功能正常\n5. 能正确生成多语言JSON文件\n6. 性能良好，对大量文本处理高效",
+      "analysisResult": "国际化提取替换翻译工具开发项目架构已明确，采用模块化设计，使用TypeScript开发，基于Node.js运行环境，需遵循PRD文档的要求实现扫描、提取、替换、翻译功能。",
+      "summary": "Key-Value管理器已成功实现并通过测试验证。该模块提供了完整的中文文本和对应key的生成、存储、查询和去重功能，支持拼音转换和哈希生成两种key生成方式，能够处理重复key，支持多语言管理，并能够正确加载和保存JSON文件。模块设计采用了灵活的配置选项，既可以使用全局配置，也支持自定义配置。测试验证了所有核心功能正常工作。",
+      "completedAt": "2025-06-27T05:30:23.615Z"
+    },
+    {
+      "id": "a00d62ce-ce11-49f7-853e-6cf3239dae49",
+      "name": "替换管理器实现",
+      "description": "实现替换管理器，负责将中文文本替换为国际化函数调用",
+      "notes": "替换逻辑需考虑多种代码场景，参考case.md中的测试用例确保覆盖各种情况。实现需保持简洁明了，不过度抽象。需根据配置支持不同的替换格式和引号样式，实现要求高效且可靠。",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "5f44ef9c-2804-4507-a96c-2c5e4281e83d"
+        }
+      ],
+      "createdAt": "2025-06-27T03:02:15.772Z",
+      "updatedAt": "2025-06-27T05:39:17.527Z",
+      "relatedFiles": [
+        {
+          "path": "src/core/replacement-manager.ts",
+          "type": "CREATE",
+          "description": "替换管理器实现",
+          "lineStart": 1,
+          "lineEnd": 150
+        }
+      ],
+      "implementationGuide": "1. 创建替换模板定义，支持配置中的functionName选项\n2. 实现基本替换函数，支持不同引号样式（单引号、双引号）\n3. 添加参数化替换支持（如$t('key', {param: value})）\n4. 处理特殊替换场景（如JSX中的替换）\n5. 参考case.md确保覆盖所有替换场景\n6. 需要的依赖：\n   - 无需额外依赖，使用JavaScript内置功能即可",
+      "verificationCriteria": "1. 能正确替换不同引号类型的字符串\n2. 支持带参数的国际化函数调用\n3. 处理各种特殊场景的替换\n4. 替换结果符合语法要求\n5. 对不同JavaScript/TypeScript语法有良好支持",
+      "analysisResult": "国际化提取替换翻译工具开发项目架构已明确，采用模块化设计，使用TypeScript开发，基于Node.js运行环境，需遵循PRD文档的要求实现扫描、提取、替换、翻译功能。",
+      "summary": "成功实现了替换管理器，支持各种替换场景，包括基本字符串替换、JSX替换、模板字符串替换，以及带参数的替换。实现了引号类型检测和处理，支持单引号、双引号和反引号。通过配置支持自定义函数名，并提供了完整的测试用例覆盖各种场景。代码结构清晰，注释完整，符合TypeScript类型安全要求。",
+      "completedAt": "2025-06-27T05:39:17.527Z"
+    },
+    {
+      "id": "20652c88-1254-4c26-ab33-0b5b3e7b2f50",
+      "name": "Import自动导入管理器实现",
+      "description": "实现Import自动导入管理器，处理国际化函数导入语句的自动添加",
+      "notes": "导入管理需要处理AST操作，使用@babel/types辅助实现。关键要求是需要保证导入后前后都是独立一行，即保持良好的代码格式。需支持多种导入位置配置，如afterImports、beforeImports、topOfFile等。保持实现的简洁性，不过早引入复杂逻辑。",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "5f44ef9c-2804-4507-a96c-2c5e4281e83d"
+        }
+      ],
+      "createdAt": "2025-06-27T03:02:15.772Z",
+      "updatedAt": "2025-06-27T05:46:36.997Z",
+      "relatedFiles": [
+        {
+          "path": "src/core/import-manager.ts",
+          "type": "CREATE",
+          "description": "Import自动导入管理器实现",
+          "lineStart": 1,
+          "lineEnd": 150
+        }
+      ],
+      "implementationGuide": "1. 设计导入检测逻辑，检查文件是否已包含所需导入\n2. 实现已存在导入检查函数\n3. 创建导入语句生成函数，支持配置中的不同imports格式\n4. 实现导入语句插入位置确定算法，支持afterImports、beforeImports、topOfFile等配置\n5. 处理不同文件类型的导入差异\n6. 使用@babel/types精确控制生成的AST结构，确保导入前后有换行\n7. 文件操作部分使用同步方法实现\n8. 需要的依赖：\n   - @babel/types: 用于AST操作和生成\n   - @babel/generator: 用于将AST转回代码",
+      "verificationCriteria": "1. 正确检测已存在的导入\n2. 能在适当位置插入导入语句\n3. 导入语句格式正确\n4. 支持不同文件类型的导入差异\n5. 处理复杂场景（如多行导入、注释等）",
+      "analysisResult": "国际化提取替换翻译工具开发项目架构已明确，采用模块化设计，使用TypeScript开发，基于Node.js运行环境，需遵循PRD文档的要求实现扫描、提取、替换、翻译功能。",
+      "summary": "成功实现了Import自动导入管理器，支持检测已存在的导入语句和自动添加导入语句。实现了三种插入位置策略：afterImports、beforeImports和topOfFile。使用@babel/parser解析代码为AST，@babel/types处理AST节点，@babel/generator将修改后的AST转换回代码。支持检测默认导入、命名导入、重命名导入和require语句。提供了全面的测试用例验证各种场景。代码结构清晰，注释完整，符合TypeScript类型安全要求。",
+      "completedAt": "2025-06-27T05:46:36.996Z"
+    },
+    {
+      "id": "46bb84d4-b95b-40a5-9aab-b80ec0aded54",
+      "name": "AST处理器实现",
+      "description": "实现AST处理器，解析代码文件，遍历AST寻找中文字符串，并执行替换操作",
+      "notes": "AST处理是工具的核心，需要充分测试各种场景。参考case.md确保覆盖所有用例，特别关注复杂嵌套场景和边界情况。实现上保持简洁明了，避免过度抽象。所有AST操作使用同步方法，确保处理顺序可控。",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "5eb1f47e-2363-4a54-8e3f-b2cb3b9be12e"
+        },
+        {
+          "taskId": "f7d107e5-54fb-42d0-8335-1c51eec2eeba"
+        },
+        {
+          "taskId": "a00d62ce-ce11-49f7-853e-6cf3239dae49"
+        },
+        {
+          "taskId": "20652c88-1254-4c26-ab33-0b5b3e7b2f50"
+        }
+      ],
+      "createdAt": "2025-06-27T03:02:15.772Z",
+      "updatedAt": "2025-06-27T05:59:19.901Z",
+      "relatedFiles": [
+        {
+          "path": "src/core/ast-processor/index.ts",
+          "type": "CREATE",
+          "description": "AST处理器入口",
+          "lineStart": 1,
+          "lineEnd": 50
+        },
+        {
+          "path": "src/core/ast-processor/parser.ts",
+          "type": "CREATE",
+          "description": "代码解析器实现",
+          "lineStart": 1,
+          "lineEnd": 100
+        },
+        {
+          "path": "src/core/ast-processor/visitor.ts",
+          "type": "CREATE",
+          "description": "AST访问器实现",
+          "lineStart": 1,
+          "lineEnd": 200
+        },
+        {
+          "path": "src/core/ast-processor/transformer.ts",
+          "type": "CREATE",
+          "description": "AST转换器实现",
+          "lineStart": 1,
+          "lineEnd": 150
+        }
+      ],
+      "implementationGuide": "1. 安装和配置Babel相关依赖\n2. 实现文件解析函数，将代码转为AST\n3. 创建AST遍历器，识别不同类型的中文字符串节点\n4. 实现AST节点替换逻辑\n5. 添加回写功能，将修改后的AST转回代码\n6. 设计插件系统，支持不同文件类型处理\n7. 确保处理case.md中的所有场景\n8. 文件操作部分应使用同步方法\n9. 需要的依赖：\n   - @babel/parser: 用于解析代码为AST\n   - @babel/traverse: 用于遍历AST\n   - @babel/types: 用于处理AST节点\n   - @babel/generator: 用于将AST转回代码\n   - @babel/template (可选): 用于生成AST模板",
+      "verificationCriteria": "1. 正确解析JavaScript/TypeScript/JSX/TSX文件\n2. 准确识别各种场景中的中文字符串\n3. 正确执行替换操作\n4. 代码回写结果符合原代码风格\n5. 支持所有case.md中列出的测试用例",
+      "analysisResult": "国际化提取替换翻译工具开发项目架构已明确，采用模块化设计，使用TypeScript开发，基于Node.js运行环境，需遵循PRD文档的要求实现扫描、提取、替换、翻译功能。",
+      "summary": "成功实现了AST处理器，支持解析代码文件、遍历AST寻找中文字符串并执行替换操作。实现了四个核心模块：parser（解析器）、visitor（访问器）、transformer（转换器）和index（入口）。支持处理字符串字面量、模板字符串、JSX文本和JSX属性中的中文文本。提供了灵活的配置选项，支持仅提取不替换、自动添加导入语句等功能。添加了完整的测试用例，覆盖了各种场景。代码结构清晰，注释完整，符合TypeScript类型安全要求。",
+      "completedAt": "2025-06-27T05:59:19.900Z"
+    },
+    {
+      "id": "2f449685-6d78-4b50-ae68-19dbc8404f44",
+      "name": "翻译处理器实现",
+      "description": "实现翻译处理器，支持调用百度翻译API进行自动翻译",
+      "notes": "当前仅需实现百度翻译平台支持，但设计上需预留扩展其他平台的能力。优先考虑使用成熟的翻译API包如baidu-translate-service，如果有更好的选择也可以评估。所有翻译操作使用同步方法。翻译结果需要正确合并到现有JSON文件中。",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "5f44ef9c-2804-4507-a96c-2c5e4281e83d"
+        },
+        {
+          "taskId": "f7d107e5-54fb-42d0-8335-1c51eec2eeba"
+        },
+        {
+          "taskId": "38d1ee29-8b31-4d47-80ab-f345f662622b"
+        }
+      ],
+      "createdAt": "2025-06-27T03:02:15.772Z",
+      "updatedAt": "2025-06-27T06:13:32.873Z",
+      "relatedFiles": [
+        {
+          "path": "src/core/translation/index.ts",
+          "type": "CREATE",
+          "description": "翻译处理器入口",
+          "lineStart": 1,
+          "lineEnd": 50
+        },
+        {
+          "path": "src/core/translation/queue.ts",
+          "type": "CREATE",
+          "description": "翻译队列管理",
+          "lineStart": 1,
+          "lineEnd": 100
+        },
+        {
+          "path": "src/core/translation/providers/baidu.ts",
+          "type": "CREATE",
+          "description": "百度翻译实现",
+          "lineStart": 1,
+          "lineEnd": 150
+        },
+        {
+          "path": "src/core/translation/providers/index.ts",
+          "type": "CREATE",
+          "description": "翻译提供者接口",
+          "lineStart": 1,
+          "lineEnd": 50
+        }
+      ],
+      "implementationGuide": "1. 设计翻译队列管理系统\n2. 实现百度翻译API接口封装，优先评估使用baidu-translate-service或其他成熟包\n3. 添加错误重试、并发控制和延迟处理\n4. 创建翻译结果处理和写入功能\n5. 设计provider接口，预留其他翻译平台支持\n6. 确保API密钥等敏感信息安全处理\n7. 文件操作应使用同步方法\n8. 需要的依赖：\n   - baidu-translate-service (或评估其他合适的百度翻译包)\n   - lodash-es: 用于并发控制和节流\n   - fs-extra: 用于文件操作（使用xxxSync系列方法）",
+      "verificationCriteria": "1. 能正确调用百度翻译API\n2. 翻译队列管理有效控制并发和延迟\n3. 错误重试机制正常工作\n4. 翻译结果正确写入多语言文件\n5. 设计具有可扩展性，方便后续添加其他翻译平台",
+      "analysisResult": "国际化提取替换翻译工具开发项目架构已明确，采用模块化设计，使用TypeScript开发，基于Node.js运行环境，需遵循PRD文档的要求实现扫描、提取、替换、翻译功能。",
+      "summary": "任务已完成，实现了完整的翻译处理器功能。包括：1）设计了可扩展的翻译提供者接口，2）实现了百度翻译API集成，3）创建了翻译队列管理系统支持并发控制和错误重试，4）实现了翻译结果处理和写入功能，5）开发了测试用例验证功能。所有代码均遵循TypeScript类型安全，并与现有系统紧密集成。",
+      "completedAt": "2025-06-27T06:13:32.872Z"
+    },
+    {
+      "id": "f2412986-9a0e-483b-8eef-1eb04b549897",
+      "name": "CLI实现",
+      "description": "实现命令行接口，支持init、extract、replace和translate命令",
+      "notes": "CLI是用户交互的主要入口，需要提供友好的使用体验和清晰的错误提示。命令实现需符合PRD要求，支持init、extract、replace和translate功能。所有命令执行使用同步方式，确保流程可控。遵循配置文件中的选项定义实现相应功能。",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "5f44ef9c-2804-4507-a96c-2c5e4281e83d"
+        },
+        {
+          "taskId": "46bb84d4-b95b-40a5-9aab-b80ec0aded54"
+        },
+        {
+          "taskId": "2f449685-6d78-4b50-ae68-19dbc8404f44"
+        }
+      ],
+      "createdAt": "2025-06-27T03:02:15.772Z",
+      "updatedAt": "2025-06-27T06:44:29.746Z",
+      "relatedFiles": [
+        {
+          "path": "src/cli/index.ts",
+          "type": "CREATE",
+          "description": "CLI入口文件",
+          "lineStart": 1,
+          "lineEnd": 100
+        },
+        {
+          "path": "src/cli/commands/init.ts",
+          "type": "CREATE",
+          "description": "init命令实现",
+          "lineStart": 1,
+          "lineEnd": 80
+        },
+        {
+          "path": "src/cli/commands/extract.ts",
+          "type": "CREATE",
+          "description": "extract命令实现",
+          "lineStart": 1,
+          "lineEnd": 100
+        },
+        {
+          "path": "src/cli/commands/replace.ts",
+          "type": "CREATE",
+          "description": "replace命令实现",
+          "lineStart": 1,
+          "lineEnd": 80
+        },
+        {
+          "path": "src/cli/commands/translate.ts",
+          "type": "CREATE",
+          "description": "translate命令实现",
+          "lineStart": 1,
+          "lineEnd": 100
+        }
+      ],
+      "implementationGuide": "1. 安装和配置commander依赖\n2. 实现help和version命令\n3. 开发init命令，生成默认配置文件\n4. 实现extract命令，扫描并提取中文文案\n5. 实现replace命令，替换中文为国际化函数\n6. 开发translate命令，调用翻译API生成多语言\n7. 添加命令行参数解析和帮助文档\n8. 文件操作相关逻辑使用同步方法\n9. 需要的依赖：\n   - commander: 用于命令行参数解析\n   - chalk (可选): 用于彩色输出\n   - ora (可选): 用于命令行进度显示",
+      "verificationCriteria": "1. 所有命令能正常运行\n2. 命令行参数解析正确\n3. 提供友好的帮助信息和错误提示\n4. 命令执行流程符合预期\n5. 支持配置文件路径指定等高级功能",
+      "analysisResult": "国际化提取替换翻译工具开发项目架构已明确，采用模块化设计，使用TypeScript开发，基于Node.js运行环境，需遵循PRD文档的要求实现扫描、提取、替换、翻译功能。",
+      "summary": "成功实现了CLI命令行接口，支持init、extract、replace和translate四个核心命令。使用commander库实现了命令行参数解析，chalk库实现彩色输出，ora库实现进度显示。每个命令都支持--debug和--verbose等全局选项，以及各自特定的选项。实现了友好的错误处理和帮助信息，并确保了命令之间的流程衔接。所有文件操作均使用同步方法，确保流程可控。",
+      "completedAt": "2025-06-27T06:44:29.746Z"
+    },
+    {
+      "id": "a182f6b3-e103-4e43-a480-7e38b5149372",
+      "name": "主流程实现",
+      "description": "实现工具的主流程，整合各模块功能，完成从配置加载到文件处理的完整流程",
+      "notes": "主流程是各模块的整合点，需确保各模块间协作顺畅，处理好异常情况。实现上保持简洁明了，不引入过度设计。所有操作使用同步方法，确保流程可控。遵循配置文件定义的预期工作流程。",
+      "status": "pending",
+      "dependencies": [
+        {
+          "taskId": "5f44ef9c-2804-4507-a96c-2c5e4281e83d"
+        },
+        {
+          "taskId": "46bb84d4-b95b-40a5-9aab-b80ec0aded54"
+        },
+        {
+          "taskId": "f7d107e5-54fb-42d0-8335-1c51eec2eeba"
+        },
+        {
+          "taskId": "f2412986-9a0e-483b-8eef-1eb04b549897"
+        }
+      ],
+      "createdAt": "2025-06-27T03:02:15.772Z",
+      "updatedAt": "2025-06-27T03:29:56.051Z",
+      "relatedFiles": [
+        {
+          "path": "src/index.ts",
+          "type": "CREATE",
+          "description": "主入口文件",
+          "lineStart": 1,
+          "lineEnd": 80
+        },
+        {
+          "path": "src/core/process.ts",
+          "type": "CREATE",
+          "description": "处理流程实现",
+          "lineStart": 1,
+          "lineEnd": 150
+        }
+      ],
+      "implementationGuide": "1. 创建初始化函数，负责加载配置、初始化各模块\n2. 实现扫描流程，查找匹配的文件\n3. 开发处理流程，对文件进行AST解析和中文提取\n4. 实现替换流程，替换中文为国际化函数调用\n5. 添加输出流程，生成多语言JSON文件\n6. 开发入口文件，整合所有流程\n7. 处理各种异常情况，提供友好的错误提示\n8. 文件操作相关部分使用同步方法实现\n9. 需要的依赖：主要依赖各个模块提供的功能，无需额外核心依赖",
+      "verificationCriteria": "1. 完整流程能正常运行\n2. 模块间协作顺畅\n3. 正确处理异常情况\n4. 性能良好，能处理大型项目\n5. 输出结果符合预期",
+      "analysisResult": "国际化提取替换翻译工具开发项目架构已明确，采用模块化设计，使用TypeScript开发，基于Node.js运行环境，需遵循PRD文档的要求实现扫描、提取、替换、翻译功能。"
+    },
+    {
+      "id": "715ee21a-3e7b-4fd9-acb7-90004288105f",
+      "name": "测试用例编写",
+      "description": "编写单元测试和集成测试，确保工具在各种场景下正常工作",
+      "notes": "测试用例应覆盖正常流程和异常情况，特别关注case.md中列出的复杂场景。必须确保测试覆盖所有在case.md中列出的场景，包括但不限于：模板字符串嵌套、JSX表达式容器、对象字面量、函数场景、条件表达式、TypeScript特有场景等。测试应该全面且易于维护。",
+      "status": "pending",
+      "dependencies": [
+        {
+          "taskId": "a182f6b3-e103-4e43-a480-7e38b5149372"
+        }
+      ],
+      "createdAt": "2025-06-27T03:02:15.772Z",
+      "updatedAt": "2025-06-27T03:31:16.228Z",
+      "relatedFiles": [
+        {
+          "path": "test/unit/config/loader.test.ts",
+          "type": "CREATE",
+          "description": "配置加载器测试",
+          "lineStart": 1,
+          "lineEnd": 100
+        },
+        {
+          "path": "test/unit/core/key-value-manager.test.ts",
+          "type": "CREATE",
+          "description": "Key-Value管理器测试",
+          "lineStart": 1,
+          "lineEnd": 100
+        },
+        {
+          "path": "test/unit/core/ast-processor.test.ts",
+          "type": "CREATE",
+          "description": "AST处理器测试",
+          "lineStart": 1,
+          "lineEnd": 150
+        },
+        {
+          "path": "test/integration/full-process.test.ts",
+          "type": "CREATE",
+          "description": "完整流程测试",
+          "lineStart": 1,
+          "lineEnd": 200
+        },
+        {
+          "path": "test/fixtures",
+          "type": "CREATE",
+          "description": "测试用例目录",
+          "lineStart": 1,
+          "lineEnd": 1
+        }
+      ],
+      "implementationGuide": "1. 安装和配置Jest测试框架\n2. 为每个核心模块编写单元测试\n3. 创建集成测试，覆盖完整流程\n4. 添加case.md中的测试用例，确保全面覆盖\n5. 实现测试辅助函数和mock数据\n6. 测试各种边界条件和异常情况\n7. 文件操作部分使用同步方法\n8. 确保测试覆盖case.md中的所有场景类型\n9. 需要的依赖：\n   - jest: 测试框架\n   - ts-jest: TypeScript支持\n   - @types/jest: TypeScript类型定义",
+      "verificationCriteria": "1. 单元测试覆盖所有核心模块\n2. 集成测试覆盖完整流程\n3. 测试用例覆盖case.md中的所有场景\n4. 测试自动化，能通过npm test运行\n5. 测试报告清晰明确",
+      "analysisResult": "国际化提取替换翻译工具开发项目架构已明确，采用模块化设计，使用TypeScript开发，基于Node.js运行环境，需遵循PRD文档的要求实现扫描、提取、替换、翻译功能。"
+    },
+    {
+      "id": "e8c224ac-04cd-4b18-a9f8-6029f1745292",
+      "name": "文档编写",
+      "description": "编写项目文档，包括README、使用指南、API文档等",
+      "notes": "文档是用户了解和使用工具的重要资源，需要清晰、准确、易于理解。文档应详细说明配置项（参考configuration.md）和工具支持的场景（参考case.md）。重点说明使用方法和注意事项，提供示例帮助用户快速上手。",
+      "status": "pending",
+      "dependencies": [
+        {
+          "taskId": "f2412986-9a0e-483b-8eef-1eb04b549897"
+        },
+        {
+          "taskId": "715ee21a-3e7b-4fd9-acb7-90004288105f"
+        }
+      ],
+      "createdAt": "2025-06-27T03:02:15.772Z",
+      "updatedAt": "2025-06-27T03:23:09.737Z",
+      "relatedFiles": [
+        {
+          "path": "README.md",
+          "type": "CREATE",
+          "description": "项目README",
+          "lineStart": 1,
+          "lineEnd": 200
+        },
+        {
+          "path": "docs/guide.md",
+          "type": "CREATE",
+          "description": "使用指南",
+          "lineStart": 1,
+          "lineEnd": 300
+        },
+        {
+          "path": "docs/config.md",
+          "type": "CREATE",
+          "description": "配置文档",
+          "lineStart": 1,
+          "lineEnd": 200
+        },
+        {
+          "path": "examples",
+          "type": "CREATE",
+          "description": "示例目录",
+          "lineStart": 1,
+          "lineEnd": 1
+        }
+      ],
+      "implementationGuide": "1. 创建README.md，包含项目介绍、安装说明、基本用法\n2. 编写详细的使用指南，包括所有命令和配置选项，参照configuration.md\n3. 为核心API添加JSDoc注释\n4. 创建示例目录，提供不同场景的使用示例，参考case.md\n5. 添加CHANGELOG和贡献指南\n6. 详细说明工具支持的场景和限制\n7. 提供配置文件的完整示例\n8. 需要的依赖：无需额外依赖",
+      "verificationCriteria": "1. README包含完整的项目信息和基本用法\n2. 使用指南详细覆盖所有功能\n3. 配置文档清晰说明所有配置选项\n4. 核心代码有完善的JSDoc注释\n5. 示例能帮助用户快速上手",
+      "analysisResult": "国际化提取替换翻译工具开发项目架构已明确，采用模块化设计，使用TypeScript开发，基于Node.js运行环境，需遵循PRD文档的要求实现扫描、提取、替换、翻译功能。"
+    },
+    {
+      "id": "1555c7d7-da84-46eb-84f0-4aa8a0b46b24",
+      "name": "创建CLI辅助模块",
+      "description": "创建CLI辅助模块，最大化复用现有模块功能，提取各命令间的共同逻辑，简化CLI实现，实现逻辑收敛",
+      "notes": "确保对CLI流程有整体性思考，不只是提取共同函数，而是应该设计通用流程，让各命令实现更加简洁。各命令实现应该只需要关注自己的业务逻辑，共享部分完全由辅助模块处理。",
+      "status": "pending",
+      "dependencies": [],
+      "createdAt": "2025-06-27T07:13:11.795Z",
+      "updatedAt": "2025-06-27T07:32:18.809Z",
+      "relatedFiles": [
+        {
+          "path": "src/cli/utils.ts",
+          "type": "CREATE",
+          "description": "CLI辅助函数模块",
+          "lineStart": 1,
+          "lineEnd": 100
+        },
+        {
+          "path": "src/utils/file.ts",
+          "type": "REFERENCE",
+          "description": "文件操作模块，用于复用其功能",
+          "lineStart": 1,
+          "lineEnd": 290
+        }
+      ],
+      "implementationGuide": "1. 创建src/cli/utils.ts文件\n2. 最大化复用file.ts模块功能，不重复实现相似功能\n3. 提取各命令(extract/replace/translate)中的共同逻辑，如：\n   - 文件查找与过滤\n   - 配置加载与覆盖\n   - 进度显示和结果格式化\n   - 错误处理\n4. 设计通用CLI流程函数，进一步简化命令实现\n5. 确保所有公共逻辑收敛到辅助模块中，避免散布在各命令文件中",
+      "verificationCriteria": "1. utils模块应包含所有必要的共享功能，没有重复实现file.ts已有功能\n2. 应设计通用CLI流程，让命令实现更加简洁\n3. 所有函数必须有类型定义和JSDoc注释\n4. 代码应通过eslint检查\n5. 模块收敛了所有可复用的CLI逻辑",
+      "analysisResult": "优化项目代码质量，解决文件操作复用不足、重复依赖和CLI代码重复等问题，确保严格遵循PRD和文档需求。需要移除glob依赖，使用file.ts模块处理所有文件操作，创建CLI辅助模块减少命令实现中的代码冗余。"
+    },
+    {
+      "id": "178cb7e8-2e6c-4c26-a109-14f2b9e0333d",
+      "name": "重构CLI命令实现",
+      "description": "重构CLI命令实现，使用新的CLI辅助模块简化所有命令代码，消除重复逻辑，实现命令实现的高度精简和统一",
+      "notes": "重构后的命令代码应该非常简洁，专注于核心业务逻辑，尽可能减少代码行数。所有命令遵循相同的流程模式，保持一致性。",
+      "status": "pending",
+      "dependencies": [
+        {
+          "taskId": "1555c7d7-da84-46eb-84f0-4aa8a0b46b24"
+        }
+      ],
+      "createdAt": "2025-06-27T07:13:11.795Z",
+      "updatedAt": "2025-06-27T07:33:07.802Z",
+      "relatedFiles": [
+        {
+          "path": "src/cli/commands/extract.ts",
+          "type": "TO_MODIFY",
+          "description": "提取命令实现",
+          "lineStart": 1,
+          "lineEnd": 147
+        },
+        {
+          "path": "src/cli/commands/replace.ts",
+          "type": "TO_MODIFY",
+          "description": "替换命令实现",
+          "lineStart": 1,
+          "lineEnd": 158
+        },
+        {
+          "path": "src/cli/commands/translate.ts",
+          "type": "TO_MODIFY",
+          "description": "翻译命令实现",
+          "lineStart": 1,
+          "lineEnd": 100
+        },
+        {
+          "path": "src/cli/commands/init.ts",
+          "type": "TO_MODIFY",
+          "description": "初始化命令实现",
+          "lineStart": 1,
+          "lineEnd": 80
+        }
+      ],
+      "implementationGuide": "1. 修改extract.ts，使用CLI辅助模块的通用流程替代重复代码\n2. 修改replace.ts，使用CLI辅助模块的通用流程替代重复代码\n3. 修改translate.ts，使用CLI辅助模块的通用流程替代重复代码\n4. 修改init.ts，使用CLI辅助模块的通用流程替代重复代码\n5. 各命令实现只需要关注核心业务逻辑，共享流程由辅助模块统一处理\n6. 删除所有命令中重复实现的findFiles等函数",
+      "verificationCriteria": "1. 完全移除所有命令实现中的重复代码\n2. 使用CLI辅助模块的流程和功能替代重复实现\n3. 各命令代码行数比原来显著减少\n4. 所有命令保持相同的实现风格和结构\n5. 功能保持不变，仅优化实现方式",
+      "analysisResult": "优化项目代码质量，解决文件操作复用不足、重复依赖和CLI代码重复等问题，确保严格遵循PRD和文档需求。需要移除glob依赖，使用file.ts模块处理所有文件操作，创建CLI辅助模块减少命令实现中的代码冗余。"
+    },
+    {
+      "id": "01ccca56-66b9-452a-ae30-928a27f4ef23",
+      "name": "移除glob依赖使用fast-glob",
+      "description": "彻底移除glob依赖，使用file.ts中基于fast-glob的实现替换所有代码中的glob使用",
+      "notes": "这项任务的关键点是确保完全移除对glob包的依赖，使用已有的基于fast-glob的实现。需要配合\"创建CLI辅助模块\"和\"重构CLI命令实现\"任务，确保CLI命令不再直接使用glob，而是使用CLI辅助模块中的函数，这些函数再基于file.ts模块工作。",
+      "status": "pending",
+      "dependencies": [
+        {
+          "taskId": "178cb7e8-2e6c-4c26-a109-14f2b9e0333d"
+        }
+      ],
+      "createdAt": "2025-06-27T07:13:11.795Z",
+      "updatedAt": "2025-06-27T07:38:38.231Z",
+      "relatedFiles": [
+        {
+          "path": "package.json",
+          "type": "TO_MODIFY",
+          "description": "项目依赖配置",
+          "lineStart": 1,
+          "lineEnd": 68
+        },
+        {
+          "path": "pnpm-lock.yaml",
+          "type": "TO_MODIFY",
+          "description": "依赖锁文件",
+          "lineStart": 1,
+          "lineEnd": 1430
+        }
+      ],
+      "implementationGuide": "1. 系统地检查所有代码中glob包的导入和使用，主要是：\n   - src/cli/commands/extract.ts和replace.ts中的`import { glob } from 'glob'`\n   - 这两个文件中直接使用glob的findFiles函数实现\n2. 修改package.json，移除glob依赖\n3. 确保CLI辅助模块(src/cli/utils.ts)的findMatchingFiles函数正确使用file.ts的findFiles，替代直接使用glob\n4. 修改CLI命令实现，使用辅助模块的findMatchingFiles而非自己实现的findFiles\n5. 确认所有匹配文件、过滤文件的功能都通过file.ts实现\n6. 更新依赖锁文件，运行pnpm install",
+      "verificationCriteria": "1. package.json中不再包含glob依赖\n2. 代码中不存在任何`import ... from 'glob'`语句\n3. 所有文件查找、匹配功能都通过file.ts或CLI辅助模块实现\n4. CLI命令实现中不再有自定义的findFiles函数\n5. 功能保持与原来完全一致\n6. 成功运行pnpm install更新依赖",
+      "analysisResult": "优化项目代码质量，解决文件操作复用不足、重复依赖和CLI代码重复等问题，确保严格遵循PRD和文档需求。需要移除glob依赖，使用file.ts模块处理所有文件操作，创建CLI辅助模块减少命令实现中的代码冗余。"
+    },
+    {
+      "id": "10da1618-52fd-444f-8a28-ba6c517fa34d",
+      "name": "验证优化结果",
+      "description": "全面测试优化后的代码，确保所有功能正常工作，并且符合PRD和文档要求",
+      "notes": "特别注意case.md文档中的复杂中文提取场景是否正常工作",
+      "status": "pending",
+      "dependencies": [
+        {
+          "taskId": "01ccca56-66b9-452a-ae30-928a27f4ef23"
+        }
+      ],
+      "createdAt": "2025-06-27T07:13:11.795Z",
+      "updatedAt": "2025-06-27T07:13:11.795Z",
+      "relatedFiles": [
+        {
+          "path": "prd.md",
+          "type": "REFERENCE",
+          "description": "需求文档",
+          "lineStart": 1,
+          "lineEnd": 106
+        },
+        {
+          "path": "configuration.md",
+          "type": "REFERENCE",
+          "description": "配置文档",
+          "lineStart": 1,
+          "lineEnd": 467
+        },
+        {
+          "path": "case.md",
+          "type": "REFERENCE",
+          "description": "测试用例文档",
+          "lineStart": 1,
+          "lineEnd": 1155
+        }
+      ],
+      "implementationGuide": "1. 执行所有CLI命令，验证功能正常\n2. 测试特殊场景下的文件操作\n3. 检查代码质量，确保无冗余和重复\n4. 对照PRD和配置文档，确认实现符合要求",
+      "verificationCriteria": "1. 所有CLI命令能正常执行\n2. 代码中不存在重复的文件操作实现\n3. 不再依赖glob，统一使用fast-glob\n4. 所有case.md中的测试用例都能正确处理",
+      "analysisResult": "优化项目代码质量，解决文件操作复用不足、重复依赖和CLI代码重复等问题，确保严格遵循PRD和文档需求。需要移除glob依赖，使用file.ts模块处理所有文件操作，创建CLI辅助模块减少命令实现中的代码冗余。"
+    }
+  ]
+}

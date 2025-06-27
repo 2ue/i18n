@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "shrimp-task-manager": {
+      "command": "node",
+      "args": [
+        "/root/code/mcp-shrimp-task-manager/dist/index.js"
+      ],
+      "env": {
+        "DATA_DIR": "/root/code/i18n/.shrimp-task-master",
+        "ENABLE_GUI": "false",
+        "TEMPLATES_USE": "zh"
+      }
+    }
+  }
+}
