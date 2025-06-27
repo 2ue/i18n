@@ -22,7 +22,13 @@
     "test:coverage": "jest --coverage",
     "prepare": "npm run build",
     "cli": "node ./bin/cli.js",
-    "postbuild": "chmod +x ./bin/cli.js"
+    "postbuild": "chmod +x ./bin/cli.js",
+    "test:clean": "rm -rf temp locales dist",
+    "test:scan": "node ./bin/cli.js scan",
+    "test:replace": "node ./bin/cli.js replace",
+    "test:compare": "node test/compare-results.js",
+    "test:integration": "jest test/integration",
+    "test:full": "npm run test:clean && npm run build && npm run test:scan && npm run test:replace && npm run test:compare"
   },
   "keywords": [
     "i18n",
